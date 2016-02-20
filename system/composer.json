@@ -1,0 +1,7 @@
+{
+    "require": {
+        "modularr/uri": "^1.0",
+        "kzykhys/ciconia": "^1.0",
+        "twig/twig": "~1.0"
+    }
+}

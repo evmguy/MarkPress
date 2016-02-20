@@ -1,0 +1,17 @@
+{
+    "name": "modularr/uri",
+    "type": "library",
+    "description": "Single Responisibilty Uri Library",
+    "keywords": ["uri","url","helper","library"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "David D'hont",
+            "email": "blaxus@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/", "src/URI.php"],
+        "psr-0": {"": "src"}
+    }
+}
