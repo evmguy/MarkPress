@@ -94,30 +94,3 @@ We make use of the amazing Twig template engine. Which makes it easy for designe
         </div>
     </body>
     </html>
-
-## What is this Library?
-
-This library is an aim at revamping the ancient CuteNews. It takes an old concept with newer techniques and code.
-
-### The how
-
-Our Blogging library allows you to integrate a custom blog into your website in no time. Much to how CuteNews used to work back in the day.
-
-## Some History
-
-CuteNews is a CMS that allows you to integrate their blog as a module inside your very own website. Unlike most CMS that exist today.
-
-Most CMS have their own framework and require you to theme their site and install it next to your website. And just like CuteNews they have a admin panel.
-
-## Fast forward
-
-Our Library, works similarly to CuteNews, however it does not require it's own Subdomain or Admin Panel. It uses a more modern template engine and package manager and makes use of Markdown and Yaml Frontmatter.
-
-Instead of being stuck in a framework, or managing yet another CMS. You can instead directly integrate a simple blogging platform into your PHP project in notime. No Admin Panel or Database needed.
-
-MarkPress gets out of your way, and just lets you create one or more blogs and pages that you can integrate into your website rather then maintaining yet another CMS. And with newer well tested and robust up to date libraries and code.
-
-Dependencies:
-
-- [ParseDown (Markdown Parser)](https://github.com/erusev/parsedown)
-- [Mustashe (Template Engine)](https://github.com/mustache/mustache)
