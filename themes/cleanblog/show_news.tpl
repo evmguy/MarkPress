@@ -14,7 +14,7 @@
             by {{ post.author }}
             {% endif %}
             on {{ post.date|date('F d, Y', "Europe/Brussels") }}
-        <!--July 8, 2014 --></p>
+        </p>
     </div>
     <hr>
     {% endfor %}
