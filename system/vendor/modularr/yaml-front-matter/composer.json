@@ -1,0 +1,19 @@
+{
+    "name": "modularr/yaml-front-matter",
+    "type": "library",
+    "description": "YAML-FrontMatter is a simple to use PHP only FrontMatter type parser Library.",
+    "keywords": ["php","parser","parsing","frontmatter","metadata"],
+    "license": "proprietary",
+    "authors": [
+        {
+            "name": "David D'hont",
+            "email": "blaxus@gmail.com"
+        }
+    ],
+    "autoload": {
+        "classmap": ["src/", "src/frontmatter.php"]
+    },
+    "require-dev":{
+        "phpunit/phpunit": "~4.0"
+    }
+}

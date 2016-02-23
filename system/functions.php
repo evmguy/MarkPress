@@ -22,6 +22,7 @@ function view($template,$data,$settings=array('autoescape'=>false,'debug'=>false
 {
     $loader = new Twig_Loader_Filesystem('./');
     $twig = new Twig_Environment($loader, $settings);
+    $twig->addFunction(new Twig_SimpleFunction('file_exists', 'file_exists'));
 
     return $twig->render($template, $data);
 }
@@ -31,7 +32,7 @@ function parse_file($file, $template)
     global $that;
     /**/
     $page = new FrontMatter($file);
-    #$template = file_get_contents($template);
+    /** /
     $data = array(
         'title'       => $page->fetch('title'),
         'content'     => MarkDown($page->fetch('content')),
@@ -39,6 +40,18 @@ function parse_file($file, $template)
         'date'        => $page->fetch('date'),
         'description' => ($page->fetch('description') == '' ? '' : $page->fetch('description'))
     );
+    /** /
+    $data = array(
+        'title'       => $page->data['title'],
+        'content'     => MarkDown($page->data['content']),
+        'author'      => $page->data['author'],
+        'date'        => $page->data['date'],
+        'description' => ($page->data['description'] == '' ? '' : $page->data['description'])
+    );
+    /**/
+    $page->data['content'] = MarkDown($page->data['content']);
+    $data = $page->data;
+    /**/
     $data['base']  = 'http://'.$_SERVER['SERVER_NAME'].$that->settings->root;
     $data['theme'] = $data['base'].'/themes/'.$that->settings->theme;
     $data['css']   = $data['theme'].'/css';
@@ -56,11 +69,12 @@ function show_news($folder='posts',$template='templates/show_news.tpl')
     foreach($files as $file)
     {
         $page  = new FrontMatter($file);
-        if($page->fetch('route') == '') {
+        if($page->data['route'] == '') {
             $route = $that->uri->segment(1,'').'/'.substr($file, strlen($folder)+1, -3);
         } else {
-            $route = $page->fetch('route');
+            $route = $page->data['route'];
         }
+        /** /
         $data[] = array(
             'route'       => $route,
             'author'      => $page->fetch('author'),
@@ -69,6 +83,11 @@ function show_news($folder='posts',$template='templates/show_news.tpl')
             'title'       => ($page->fetch('title') != '' ? $page->fetch('title') : $route),
             'description' => ($page->fetch('description') == '' ? '' : $page->fetch('description')),
         );
+        /**/
+        $page->data['content'] = MarkDown($page->data['content']);
+        $page->data['route'] = $route;
+        $data[] = $page->data;
+        /**/
     }
     /**/
     function date_compare($a, $b)
@@ -79,10 +98,6 @@ function show_news($folder='posts',$template='templates/show_news.tpl')
     }
     usort($data, 'date_compare');
     $data = array_reverse($data);
-    /**/
-
-    /** /
-    $template = file_get_contents('templates/show_news.tpl');
     /**/
     $data['posts'] = $data;
     $data['base']  = 'http://'.$_SERVER['SERVER_NAME'].$that->settings->root;

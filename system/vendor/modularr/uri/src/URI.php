@@ -14,11 +14,6 @@
         }
 
         $this->segments = explode('/', $this->uri_string);
-
-        $this->base = 'http://';
-        $this->base .= $_SERVER['SERVER_NAME'];
-        $this->base .= $this->folder;
-        #$this->base .= $_SERVER['REQUEST_URI'];
     }
 
 	public function slash_segment($n, $where = 'trailing', $which = 'segment')
