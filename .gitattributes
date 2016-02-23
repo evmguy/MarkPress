@@ -1,2 +1,3 @@
 system/vendor/* linguist-vendored
+themes/* linguist-vendored
 README.md linguist-documentation
