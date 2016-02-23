@@ -1,4 +1,5 @@
 <?php
+use Ciconia\Extension\Gfm;
 function to_obj($input)
 {
     return json_decode(json_encode($input));
@@ -12,9 +13,24 @@ function debug($data,$return=false)
     }
     echo '<pre>'.print_r($data,1).'</pre>';
 }
-function MarkDown($input)
+function MarkDown($input,$type=false)
 {
     $ciconia = new \Ciconia\Ciconia();
+    if(strtolower($type) == 'mfm') {
+        $ciconia->addExtension(new Gfm\FencedCodeBlockExtension());
+        $ciconia->addExtension(new Gfm\TaskListExtension());
+        $ciconia->addExtension(new Gfm\InlineStyleExtension());
+        $ciconia->addExtension(new Gfm\WhiteSpaceExtension());
+        $ciconia->addExtension(new Gfm\TableExtension());
+    }
+    if(strtolower($type) == 'gfm') {
+        $ciconia->addExtension(new Gfm\FencedCodeBlockExtension());
+        $ciconia->addExtension(new Gfm\TaskListExtension());
+        $ciconia->addExtension(new Gfm\InlineStyleExtension());
+        $ciconia->addExtension(new Gfm\WhiteSpaceExtension());
+        $ciconia->addExtension(new Gfm\TableExtension());
+        $ciconia->addExtension(new Gfm\UrlAutoLinkExtension());
+    }
     $content = $ciconia->render($input);
     return $content;
 }
@@ -30,40 +46,22 @@ function view($template,$data,$settings=array('autoescape'=>false,'debug'=>false
 function parse_file($file, $template)
 {
     global $that;
-    /**/
+
     $page = new FrontMatter($file);
-    /** /
-    $data = array(
-        'title'       => $page->fetch('title'),
-        'content'     => MarkDown($page->fetch('content')),
-        'author'      => $page->fetch('author'),
-        'date'        => $page->fetch('date'),
-        'description' => ($page->fetch('description') == '' ? '' : $page->fetch('description'))
-    );
-    /** /
-    $data = array(
-        'title'       => $page->data['title'],
-        'content'     => MarkDown($page->data['content']),
-        'author'      => $page->data['author'],
-        'date'        => $page->data['date'],
-        'description' => ($page->data['description'] == '' ? '' : $page->data['description'])
-    );
-    /**/
-    $page->data['content'] = MarkDown($page->data['content']);
+    $markdown = ($that->settings->markdown) ? $that->settings->markdown : false;
+    $page->data['content'] = MarkDown($page->data['content'], $markdown);
     $data = $page->data;
-    /**/
+
     $data['base']  = 'http://'.$_SERVER['SERVER_NAME'].$that->settings->root;
     $data['theme'] = $data['base'].'/themes/'.$that->settings->theme;
     $data['css']   = $data['theme'].'/css';
     $data['js']    = $data['theme'].'/js';
     echo view($template, $data);
-    /**/
 }
 
 function show_news($folder='posts',$template='templates/show_news.tpl')
 {
     global $that;
-    #$m = new Mustache_Engine;
     $files = glob("$folder/*.md");
     $html = '';
     foreach($files as $file)
@@ -74,22 +72,11 @@ function show_news($folder='posts',$template='templates/show_news.tpl')
         } else {
             $route = $page->data['route'];
         }
-        /** /
-        $data[] = array(
-            'route'       => $route,
-            'author'      => $page->fetch('author'),
-            'content'     => MarkDown($page->fetch('content')),
-            'date'        => $page->fetch('date'),
-            'title'       => ($page->fetch('title') != '' ? $page->fetch('title') : $route),
-            'description' => ($page->fetch('description') == '' ? '' : $page->fetch('description')),
-        );
-        /**/
-        $page->data['content'] = MarkDown($page->data['content']);
+        $markdown = ($that->settings->markdown) ? $that->settings->markdown : false;
+        $page->data['content'] = MarkDown($page->data['content'], $markdown);
         $page->data['route'] = $route;
         $data[] = $page->data;
-        /**/
     }
-    /**/
     function date_compare($a, $b)
     {
         $t1 = strtotime($a['date']);
@@ -98,15 +85,11 @@ function show_news($folder='posts',$template='templates/show_news.tpl')
     }
     usort($data, 'date_compare');
     $data = array_reverse($data);
-    /**/
+
     $data['posts'] = $data;
     $data['base']  = 'http://'.$_SERVER['SERVER_NAME'].$that->settings->root;
     $data['theme'] = $data['base'].'/themes/'.$that->settings->theme;
     $data['css']   = $data['theme'].'/css';
     $data['js']    = $data['theme'].'/js';
     echo view($template, $data);
-    /** /
-    return $m->render($template, $data);
-    return $html;
-    /**/
 }
