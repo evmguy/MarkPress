@@ -6,5 +6,6 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'FrontMatter' => $vendorDir . '/modularr/yaml-front-matter/src/frontmatter.php',
     'URI' => $vendorDir . '/modularr/uri/src/URI.php',
 );
