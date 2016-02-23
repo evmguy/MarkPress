@@ -5,8 +5,9 @@ include 'functions.php';
 
 $that = new stdClass;
 # Defaults
-$that->settings->content = 'content';
-$that->settings->theme   = 'default';
+$that->settings->content  = 'content';
+$that->settings->theme    = 'default';
+$that->settings->markdown = false;
 
 $settings = parse_ini_file('settings.ini',1);
 $that->settings = (object) array_merge((array)$that->settings, (array)$settings);
