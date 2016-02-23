@@ -68,13 +68,13 @@
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="post-heading">
                     <h1>{{ title }}</h1>
-                    <h2 class="subheading">
-                        {% if subtitle != false %}
-                            {{ subtitle }}
-                        {% else %}
-                            {{ content|length > 79 ? content|slice(0, 79) ~ '...' : content  }}
+                    {% if subtitle is defined %}
+                        {% if subtitle is not empty %}
+                        <h2 class="subheading">{{ subtitle }}</h2>
                         {% endif %}
-                    </h2>
+                    {% else %}
+                        <h2 class="subheading">{{ content|length > 79 ? content|slice(0, 79) ~ '...' : content  }}</h2>
+                    {% endif %}
                     <span class="meta">Posted
                         {% if author != false %}
                         by {{ author }}
