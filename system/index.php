@@ -5,47 +5,51 @@ include 'functions.php';
 
 $that = new stdClass;
 # Defaults
-$that->settings->content  = 'content';
+$that->settings->homepage = 'index';
+$that->settings->content  = 'posts';
 $that->settings->theme    = 'default';
-$that->settings->markdown = false;
+$that->settings->markdown = 'gfm';
 
+/** /
 $settings = parse_ini_file('settings.ini',1);
 $that->settings = (object) array_merge((array)$that->settings, (array)$settings);
-
+/**/
+use Symfony\Component\Yaml\Yaml;
+$settings = Yaml::parse(file_get_contents('settings.yaml'));
+$that->settings = (object) array_merge((array)$that->settings, (array)$settings);
+/**/
 $subfolder = (in_array($_SERVER['HTTP_HOST'], array('localhost', '127.0.0.1'))) ? $that->settings->root : null;
 $that->uri = new URI($subfolder);
-#debug($that);
+#debug($that); die();
+/**/
 
-$path = $that->settings->content.'/'.$that->uri->segment(1, 'index');
+$path = $that->settings->content.'/'.$that->uri->segment(1, $that->settings->homepage);
+$that->path = $that->uri->segment(1, $that->settings->homepage);
+#debug($that); die();
 if ($that->uri->segment(2)) {
     $path .= '/'.$that->uri->segment(2);
 }
 $file = $path.'.md';
-#echo $file.' | '.$path.'<br>';
+#echo $file.' | '.$path.'<br>';die();
 
 if(file_exists($file)) {
-    /** /
-    echo 'calling post template';
-    #include $file;
-    /**/
-    #echo MarkPress::show_page($slug,$folder,$file);
-    #$template = "templates/show_post.tpl";
     $template = 'themes/'.$that->settings->theme.'/show_post.tpl';
-    #die($template);
     echo parse_file($file, $template);
-    /**/
 } else {
     if(is_dir($path)) {
-        /** /
-        echo 'calling archive template';
-        #include $path;
-        /**/
-        #echo MarkPress::show_page($slug,$folder,$file);
-        #$template = "templates/show_post.tpl";
         $template = 'themes/'.$that->settings->theme.'/show_news.tpl';
-        echo show_news('posts/'.$that->uri->segment(1), $template);
-        /**/
+        echo show_news($path, $template);
     } else {
+        /**/
+        $data = array();
+        $data['pages']    = $that->pages;
+        $data['settings'] = $that->settings;
+        $data['base']     = 'http://'.$_SERVER['SERVER_NAME'].$that->settings->root;
+        $data['theme']    = $data['base'].'/themes/'.$that->settings->theme;
+        $data['css']      = $data['theme'].'/css';
+        $data['js']       = $data['theme'].'/js';
+        echo view('themes/'.$that->settings->theme.'/404.tpl', $data);
+        /** /
         echo 'calling error<br>';
         $errorPage = $that->settings->content.'/404.md';
         if(file_exists($errorPage)) {
@@ -53,5 +57,6 @@ if(file_exists($file)) {
         } else {
             echo '404 :: Not Found';
         }
+        /**/
     }
 }
