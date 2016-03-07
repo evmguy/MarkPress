@@ -1,4 +1,4 @@
-{% include 'themes/cleanblog/archive_header.tpl' %}
+{% include "themes/"~settings.theme~"/archive_header.tpl" %}
     {% for post in posts %}
     <div class="post-preview">
         <a href="{{ post.route }}"><h2 class="post-title">{{ post.title }}</h2>
@@ -11,11 +11,11 @@
         </h3></a>
         <p class="post-meta">Posted
             {% if post.author != false %}
-            by {{ post.author }}
+                by {{ post.author }}
             {% endif %}
             on {{ post.date|date('F d, Y', "Europe/Brussels") }}
         </p>
     </div>
     <hr>
     {% endfor %}
-{% include 'themes/cleanblog/footer.tpl' %}
+{% include "themes/"~settings.theme~"/footer.tpl" %}

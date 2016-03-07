@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- <base href="//modularr.com/"> -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="Awesome tools to build better websites.">
-    <meta name="author" content="">
-    <title>Blog | Modularr</title>
+    <meta name="description" content="{{ settings.description }}">
+    <title>{{ settings.sitename }}</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="{{ css }}/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
     <link href="{{ css }}/clean-blog.min.css" rel="stylesheet">
+
+    <!-- HighLight.js CSS -->
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.2.0/styles/{{settings.hljs}}.min.css"><!-- -->
 
     <!-- Custom Fonts -->
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -30,40 +31,31 @@
 </head>
 
 <body>
-    <!-- Navigation -->
-<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header page-scroll">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="./">Modularr</a>
-        </div>
-
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right">
-                <li><a href="./">Home</a></li>
-                <li><a href="./MarkPress">MarkPress</a></li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
-    </div>
-    <!-- /.container -->
-</nav>    <!-- Page Header -->
+{% include "themes/"~settings.theme~"/navigation.tpl" %}
+<!-- Page Header -->
 <!-- Set your background image for this header on the line below. -->
-<header class="intro-header" style="background-image: url('{{theme}}/img/{{ header|default('header01') }}.jpg')">
+{% if attribute(settings.routes, uri).postimage %}
+    <header class="intro-header" style="background-image: url('{{theme}}/{{ attribute(settings.routes, uri).postimage }}')">
+{% else %}
+    <header class="intro-header" style="background-image: url('{{theme}}/{{ settings.routes.default.postimage }}')">
+{% endif %}
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
                 <div class="site-heading">
-                    <h1>Basic Preview</h1>
-                    <hr class="small">
-                    <span class="subheading">How much wood could a woodchuck chuck, if a woodchuck could chuck wood?</span>
+                    <h1>
+                    {% if attribute(settings.routes, uri).title %}
+                        {{ attribute(settings.routes, uri).title }}
+                    {% else %}
+                        {{ settings.routes.default.title }}
+                    {% endif %}
+                    </h1>
+                    {% if attribute(settings.routes, uri).subtitle %}
+                        <hr class="small">
+                        <span class="subheading">
+                            {{ attribute(settings.routes, uri).subtitle }}
+                        </span>
+                    {% endif %}
                 </div>
             </div>
         </div>
