@@ -1,5 +1,51 @@
 [
     {
+        "name": "modularr/yaml-front-matter",
+        "version": "1.2.3",
+        "version_normalized": "1.2.3.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Modularr/YAML-FrontMatter.git",
+            "reference": "fcfd44013cf69033378147dc60e095a075e0f429"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Modularr/YAML-FrontMatter/zipball/fcfd44013cf69033378147dc60e095a075e0f429",
+            "reference": "fcfd44013cf69033378147dc60e095a075e0f429",
+            "shasum": ""
+        },
+        "require-dev": {
+            "phpunit/phpunit": "~4.0"
+        },
+        "time": "2016-02-23 20:14:56",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "src/",
+                "src/frontmatter.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "proprietary"
+        ],
+        "authors": [
+            {
+                "name": "David D'hont",
+                "email": "blaxus@gmail.com"
+            }
+        ],
+        "description": "YAML-FrontMatter is a simple to use PHP only FrontMatter type parser Library.",
+        "keywords": [
+            "frontmatter",
+            "metadata",
+            "parser",
+            "parsing",
+            "php"
+        ]
+    },
+    {
         "name": "modularr/uri",
         "version": "1.0.3",
         "version_normalized": "1.0.3.0",
@@ -274,49 +320,54 @@
         ]
     },
     {
-        "name": "modularr/yaml-front-matter",
-        "version": "1.2.3",
-        "version_normalized": "1.2.3.0",
+        "name": "symfony/yaml",
+        "version": "v2.8.3",
+        "version_normalized": "2.8.3.0",
         "source": {
             "type": "git",
-            "url": "https://github.com/Modularr/YAML-FrontMatter.git",
-            "reference": "fcfd44013cf69033378147dc60e095a075e0f429"
+            "url": "https://github.com/symfony/yaml.git",
+            "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995"
         },
         "dist": {
             "type": "zip",
-            "url": "https://api.github.com/repos/Modularr/YAML-FrontMatter/zipball/fcfd44013cf69033378147dc60e095a075e0f429",
-            "reference": "fcfd44013cf69033378147dc60e095a075e0f429",
+            "url": "https://api.github.com/repos/symfony/yaml/zipball/2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
+            "reference": "2a4ee40acb880c56f29fb1b8886e7ffe94f3b995",
             "shasum": ""
         },
-        "require-dev": {
-            "phpunit/phpunit": "~4.0"
+        "require": {
+            "php": ">=5.3.9"
         },
-        "time": "2016-02-23 20:14:56",
+        "time": "2016-02-23 07:41:20",
         "type": "library",
+        "extra": {
+            "branch-alias": {
+                "dev-master": "2.8-dev"
+            }
+        },
         "installation-source": "dist",
         "autoload": {
-            "classmap": [
-                "src/",
-                "src/frontmatter.php"
+            "psr-4": {
+                "Symfony\\Component\\Yaml\\": ""
+            },
+            "exclude-from-classmap": [
+                "/Tests/"
             ]
         },
         "notification-url": "https://packagist.org/downloads/",
         "license": [
-            "proprietary"
+            "MIT"
         ],
         "authors": [
             {
-                "name": "David D'hont",
-                "email": "blaxus@gmail.com"
+                "name": "Fabien Potencier",
+                "email": "fabien@symfony.com"
+            },
+            {
+                "name": "Symfony Community",
+                "homepage": "https://symfony.com/contributors"
             }
         ],
-        "description": "YAML-FrontMatter is a simple to use PHP only FrontMatter type parser Library.",
-        "keywords": [
-            "frontmatter",
-            "metadata",
-            "parser",
-            "parsing",
-            "php"
-        ]
+        "description": "Symfony Yaml Component",
+        "homepage": "https://symfony.com"
     }
 ]

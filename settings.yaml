@@ -1,0 +1,31 @@
+root: /
+base: http://site.com/
+homepage: blog
+sitename: 
+description: 
+
+hljs: zenburn
+theme: cleanblog
+markdown: mfm
+content: posts
+
+twitter: blaxus
+github: blaxus
+disqus: disqus_name
+google_analytics: code
+
+routes:
+    default:
+        title: Hello World!
+        postimage: /img/header02.jpg
+        subtitle: 'subtitle'
+    blog:
+        title: Blog
+        postimage: /img/header07.jpg
+        
+pages:
+    blog:
+        name: Blog
+        url: http://site.com/
+    about:
+        name: About
