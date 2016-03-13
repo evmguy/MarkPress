@@ -1,8 +1,8 @@
 # URI Class
 
-[![Latest Version](http://img.shields.io/packagist/v/modularr/uri.svg?style=flat)](https://packagist.org/packages/modularr/yaml-front-matter)
+[![Latest Version](http://img.shields.io/packagist/v/modularr/uri.svg?style=flat)](https://packagist.org/packages/Modularr/uri)
 [![Software License](https://img.shields.io/packagist/l/modularr/uri.svg?style=flat)](LICENSE)
-[![Total Downloads](https://img.shields.io/packagist/dt/modularr/uri.svg?style=flat)](https://packagist.org/packages/modularr/yaml-front-matter)
+[![Total Downloads](https://img.shields.io/packagist/dt/modularr/uri.svg?style=flat)](https://packagist.org/packages/Modularr/uri)
 
 The URI Class provides functions that help you retrieve information from your URI strings. If you use URI routing, you can also retrieve information about the re-routed segments.
 
