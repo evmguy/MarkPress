@@ -9,5 +9,5 @@ return array(
     'Twig_' => array($vendorDir . '/twig/twig/lib'),
     'Symfony\\Component\\OptionsResolver\\' => array($vendorDir . '/symfony/options-resolver'),
     'Symfony\\Component\\Console\\' => array($vendorDir . '/symfony/console'),
-    '' => array($vendorDir . '/modularr/uri/src', $vendorDir . '/kzykhys/ciconia/src'),
+    '' => array($vendorDir . '/kzykhys/ciconia/src', $vendorDir . '/modularr/uri/src'),
 );

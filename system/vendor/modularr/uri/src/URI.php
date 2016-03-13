@@ -3,14 +3,15 @@
     public function __construct($folder=null)
     {
         $this->folder = $folder;
+        $request = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         if(!empty($this->folder))
         {
-            $this->uri_string = explode($this->folder, $_SERVER['REQUEST_URI']);
+            $this->uri_string = explode($this->folder, $request);
             $this->uri_string = $this->uri_string['1'];
         }
         else
         {
-            $this->uri_string = $_SERVER['REQUEST_URI'];
+            $this->uri_string = $request;
         }
 
         $this->segments = explode('/', $this->uri_string);
