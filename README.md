@@ -4,7 +4,7 @@ An easy to use **Markdown File CMS**.
 
 # Quick Documentation:
 
-See it in action on [Modularr.com](http://modularr.com)
+See it in action on [daviddhont.com](http://daviddhont.com)
 
 ## Quick How to:
 
@@ -88,8 +88,7 @@ We make use of the amazing Twig template engine. Which makes it easy for designe
         <div id="content">{% block content %}{% endblock %}</div>
         <div id="footer">
             {% block footer %}<!-- -->
-                &copy; Copyright 2016 by <a href="http://moduarr.com">Modularr</a>.<!-- --
-                    &copy; Powered by <a href="http://moduarr.com">Modularr CMS 1.0</a>.<!-- -->
+                &copy; Copyright 2016 by <a href="http://moduarr.com">Modularr</a>.
             {% endblock %}
         </div>
     </body>
