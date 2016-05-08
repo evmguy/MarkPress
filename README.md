@@ -88,7 +88,7 @@ We make use of the amazing Twig template engine. Which makes it easy for designe
         <div id="content">{% block content %}{% endblock %}</div>
         <div id="footer">
             {% block footer %}<!-- -->
-                &copy; Copyright 2016 by <a href="http://moduarr.com">Modularr</a>.
+                &copy; Copyright 2016 by <a href="http://modularr.com">Modularr</a>.
             {% endblock %}
         </div>
     </body>
