@@ -10,27 +10,21 @@ $that->settings->content  = 'posts';
 $that->settings->theme    = 'default';
 $that->settings->markdown = 'gfm';
 
-/** /
-$settings = parse_ini_file('settings.ini',1);
-$that->settings = (object) array_merge((array)$that->settings, (array)$settings);
-/**/
 use Symfony\Component\Yaml\Yaml;
 $settings = Yaml::parse(file_get_contents('settings.yaml'));
 $that->settings = (object) array_merge((array)$that->settings, (array)$settings);
-/**/
+if(!empty($that->settings->timezone)) {
+    date_default_timezone_set($that->settings->timezone);
+}
 $subfolder = (in_array($_SERVER['HTTP_HOST'], array('localhost', '127.0.0.1'))) ? $that->settings->root : null;
 $that->uri = new URI($subfolder);
-#debug($that); die();
-/**/
 
 $path = $that->settings->content.'/'.$that->uri->segment(1, $that->settings->homepage);
 $that->path = $that->uri->segment(1, $that->settings->homepage);
-#debug($that); die();
 if ($that->uri->segment(2)) {
     $path .= '/'.$that->uri->segment(2);
 }
 $file = $path.'.md';
-#echo $file.' | '.$path.'<br>';die();
 
 if(file_exists($file)) {
     $template = 'themes/'.$that->settings->theme.'/show_post.tpl';
@@ -40,7 +34,6 @@ if(file_exists($file)) {
         $template = 'themes/'.$that->settings->theme.'/show_news.tpl';
         echo show_news($path, $template);
     } else {
-        /**/
         $data = array();
         $data['pages']    = $that->pages;
         $data['settings'] = $that->settings;
@@ -49,14 +42,5 @@ if(file_exists($file)) {
         $data['css']      = $data['theme'].'/css';
         $data['js']       = $data['theme'].'/js';
         echo view('themes/'.$that->settings->theme.'/404.tpl', $data);
-        /** /
-        echo 'calling error<br>';
-        $errorPage = $that->settings->content.'/404.md';
-        if(file_exists($errorPage)) {
-            include $errorPage;
-        } else {
-            echo '404 :: Not Found';
-        }
-        /**/
     }
 }
