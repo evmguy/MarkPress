@@ -4,8 +4,6 @@ An easy to use **Markdown File CMS**.
 
 # Quick Documentation:
 
-See it in action on [daviddhont.com](http://daviddhont.com)
-
 ## Quick How to:
 
 ### Install:
